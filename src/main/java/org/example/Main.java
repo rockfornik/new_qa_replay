@@ -20,6 +20,9 @@ public class Main {
 
         driver.get("https://mail.ru");
         wait("(//*[text()='Войти'])[2]");
+        String buttonLogIn = driver.findElement(By.xpath("//*[text()='Войти'])[2]")).getCssValue("display");
+        System.out.println(buttonLogIn);
+
     }
 
     public static void wait(String xpath){

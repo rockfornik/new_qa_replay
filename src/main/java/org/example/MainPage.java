@@ -1,9 +1,7 @@
 package org.example;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.interactions.Actions;
 
-import javax.swing.*;
 
 //Класс с элементами главной страницы mail.ru и взаимодействия с ними
 public class MainPage {
@@ -17,7 +15,7 @@ public class MainPage {
 
     //Элементы взаимодействия
     private By mainLogo = By.xpath("//a[@href=\"//mail.ru\"]");
-    private By regesstrationButton = By.xpath("//*[text()='Регистрация']");
+    private By registrationButton = By.xpath("//*[text()='Регистрация']");
     private By signInButton = By.xpath("(//*[text()='Войти'])[1]");
     private By settingsButton = By.xpath("//div[@class=\"ph-settings svelte-1ke9xx5\"]");
     private By signInButton2 = By.xpath("(//*[text()='Войти'])[2]");
@@ -26,35 +24,49 @@ public class MainPage {
     private By searchButton = By.xpath("//button[@class=\"search-arrow__button mffeadi__1ljar7y\"]");
 
     //Методы работы с элементами
-    public void clickMainLogo(){
+    public MainPage clickMainLogo(){
         driver.findElement(mainLogo).click();
+        return this;
     }
 
-    public void clickRegButton(){
-        driver.findElement(regesstrationButton).click();
+    public RegistrationPage clickRegButton(){
+        driver.findElement(registrationButton).click();
+        return new RegistrationPage(driver);
     }
 
-    public void clickSignIn(){
+    public MainPage clickSignIn(){
         driver.findElement(signInButton).click();
+        return this;
     }
 
-    public void clickSettings(){
+    public MainPage clickSettings(){
         driver.findElement(settingsButton).click();
+        return this;
     }
 
-    public void clickSignIn2(){
+    public MainPage clickSignIn2(){
         driver.findElement(signInButton2).click();
+        return this;
     }
 
-    public void clickCreateMail(){
+    public CreateMailPage clickCreateMail(){
         driver.findElement(createMail).click();
+        return new CreateMailPage(driver);
     }
 
-    public void clickSearch(){
-        driver.findElement(searchButton).click();
-    }
-
-    public void enterSearch(String searchText){
+    public MainPage searchText(String searchText){
         driver.findElement(searchField).sendKeys(searchText);
+        return this;
+    }
+
+    public MainPage clickSearch(){
+        driver.findElement(searchButton).click();
+        return this;
+    }
+
+    public SearchPage enterSearch(String searchText){
+        this.searchText(searchText);
+        this.clickSearch();
+        return new SearchPage(driver);
     }
 }

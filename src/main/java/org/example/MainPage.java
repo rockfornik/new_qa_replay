@@ -1,6 +1,8 @@
 package org.example;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
 
 
 //Класс с элементами главной страницы mail.ru и взаимодействия с ними
@@ -20,8 +22,8 @@ public class MainPage {
     private By settingsButton = By.xpath("//div[@class=\"ph-settings svelte-1ke9xx5\"]");
     private By signInButton2 = By.xpath("(//*[text()='Войти'])[2]");
     private By createMail = By.xpath("//*[text()='Создать почту']");
-    private By searchField = By.xpath("//div[@class=\"search-arrow__border-inset mffeadi__1ljar7y\"]");
-    private By searchButton = By.xpath("//button[@class=\"search-arrow__button mffeadi__1ljar7y\"]");
+    private By searchField = By.xpath("//*[text()='Поиск Яндекса']");
+    private By searchButton = By.xpath("//button[text()='Найти']");
 
     //Методы работы с элементами
     //Метод клика по лого
@@ -56,7 +58,8 @@ public class MainPage {
     }
     //Метод ввода текста в поле поиска
     public MainPage searchText(String searchText){
-        driver.findElement(searchField).sendKeys(searchText);
+        Actions actions = new Actions(driver);
+        actions.sendKeys(driver.findElement(searchField), searchText).perform();
         return this;
     }
     //Метод кика по кнопке "Найти"
@@ -65,8 +68,8 @@ public class MainPage {
         return this;
     }
     //Метод ввода текста в поле поиска и клика "Найти"
-    public SearchPage enterSearch(String searchText){
-        this.searchText(searchText);
+    public SearchPage enterSearch(String text){
+        this.searchText(text);
         this.clickSearch();
         return new SearchPage(driver);
     }

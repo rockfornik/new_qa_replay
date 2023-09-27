@@ -125,9 +125,9 @@ public class RegistrationPage {
         return this;
     }
     //Метод клика по кнопке "Создать" с корректными данными
-    public MyNewMailPage clickCreate(){
+    public MyNewMailPageCaptcha clickCreate(){
         driver.findElement(createButton).click();
-        return new MyNewMailPage(driver);
+        return new MyNewMailPageCaptcha(driver);
     }
     //Метод клика по кнопке "Создать" с некорректными данными
     public RegistrationPage incorrectClickCreate(){
@@ -153,7 +153,7 @@ public class RegistrationPage {
     //String name - Имя, String surname - Фамилия, int numberDay - день рождения, String month - Месяц рождения,
     // String year - год рождения, char male - пол(m-мужской, f-женский), String mailName - имя ящика, String domain - домен(mail.ru),
     // String pass - пароль, String email - дополнительный ящик.
-    public MyNewMailPage createCorrectMail(String name, String surname, String numberDay, String month, String year, char male, String mailName, String domain, String pass, String email){
+    public MyNewMailPageCaptcha createCorrectMail(String name, String surname, String numberDay, String month, String year, char male, String mailName, String domain, String pass, String email){
         this.nameText(name);
         this.surnameText(surname);
         this.dayDates(numberDay);
@@ -167,6 +167,6 @@ public class RegistrationPage {
         this.reservEMail(email);
         pause(2000);
         clickCreate();
-        return new MyNewMailPage(driver);
+        return new MyNewMailPageCaptcha(driver);
     }
 }

@@ -3,7 +3,7 @@ package org.example;
 import org.openqa.selenium.WebDriver;
 
 public class CreateMailPage {
-    WebDriver driver;
+    private WebDriver driver;
 
     public CreateMailPage(WebDriver driver) {
         this.driver = driver;

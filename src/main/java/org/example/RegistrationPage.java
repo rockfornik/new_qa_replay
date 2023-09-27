@@ -9,7 +9,7 @@ import java.time.Duration;
 import java.util.List;
 
 public class RegistrationPage {
-    WebDriver driver;
+    private WebDriver driver;
 
     public RegistrationPage(WebDriver driver) {
         this.driver = driver;
@@ -30,10 +30,12 @@ public class RegistrationPage {
     private By reservMailField = By.xpath("//input[@name=\"email\"]");
     private By createButton = By.xpath("(//*[text()='Создать'])[2]");
     private By kidsMail = By.xpath("//div[@class=\"_2F1k-ReGugy8-wThA3uvT-\"]");
-    private By spanDay = By.xpath("(//span[@class=\"base-0-2-6 control-0-2-14 secondary-0-2-20\"])[1]");
-    private By spanMonth = By.xpath("(//span[@class=\"base-0-2-6 control-0-2-14\"])[2]");
-    private By spanDay2 = By.xpath("(//span[@class=\"base-0-2-6 control-0-2-14\"])[1]");
-    private By spanYear2 = By.xpath("(//span[@class=\"base-0-2-6 control-0-2-14\"])[3]");
+    private By spanDay = By.xpath("//span[text()='День']");
+    private By spanDay2 = By.xpath("//span[text()='1']");
+    private By spanMonth = By.xpath("//span[text()='Месяц']");
+    private By spanMonth2 = By.xpath("//span[text()='Январь']");
+    private By spanYear = By.xpath("//span[text()='Год']");
+    private By spanYear2 = By.xpath("//span[text()='2023']");
     private By error = By.xpath("//small[@class=\"base-0-2-6 small-0-2-15 error-0-2-21\"]"
     );
 
@@ -64,16 +66,16 @@ public class RegistrationPage {
     //Метод выбора месяца рождения
     public RegistrationPage monthDates(String month){
         Actions action = new Actions(driver);
-        driver.findElement(spanDay).click();
+        driver.findElement(spanMonth).click();
         action.sendKeys(Keys.ENTER).perform();
         JavascriptExecutor js = (JavascriptExecutor)driver;
-        js.executeScript("arguments[0].innerText = '" + month + "';", driver.findElement(spanMonth));
+        js.executeScript("arguments[0].innerText = '" + month + "';", driver.findElement(spanMonth2));
         return this;
     }
     //Метод выбора года рождения
     public RegistrationPage yearDates(String year){
         Actions actions = new Actions(driver);
-        driver.findElement(spanDay).click();
+        driver.findElement(spanYear).click();
         actions.sendKeys(Keys.ENTER).perform();
         JavascriptExecutor js = (JavascriptExecutor)driver;
         js.executeScript("arguments[0].innerText = '" + year + "';", driver.findElement(spanYear2));

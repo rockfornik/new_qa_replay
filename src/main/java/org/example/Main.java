@@ -18,7 +18,15 @@ public class Main {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get("https://mail.ru/");
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        MainPage mainPage = new MainPage(driver);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Регистрация']")));
+        mainPage.clickSignIn();
 
+
+
+//        RegistrationPage registrationPage = new RegistrationPage(driver);
+//        registrationPage.pause(5000);
+//        driver.quit();
     }
 }

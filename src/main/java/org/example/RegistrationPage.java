@@ -23,7 +23,7 @@ public class RegistrationPage {
     private By usernameBoxField = By.xpath("//input[@name=\"username\"]");
     private By domainList = By.xpath("(//div[@class=\"Select__control css-0\"])[4]");
     private By passField = By.xpath("//input[@name=\"password\"]");
-    private By generationPassButton = By.xpath("(//a[@tabindex=\"0\"])[1]");
+    private By generationPass = By.xpath("(//a[@tabindex=\"0\"])[1]");
     private By telephoneNumberField = By.xpath("//input[@type=\"tel\"]");
     private By reservMail = By.xpath("//a[text() = 'Указать резервную почту']");
     private By reservMailText = By.xpath("//*[text() = 'Резервная почта']");
@@ -107,7 +107,7 @@ public class RegistrationPage {
     }
     //Метод клика по кнопке "Сгенерировать надежный пароль"
     public RegistrationPage generationPass(){
-        driver.findElement(generationPassButton).click();
+        driver.findElement(generationPass).click();
         return this;
     }
     //Метод заполнения номера телефона
@@ -134,14 +134,19 @@ public class RegistrationPage {
         driver.findElement(createButton).click();
         return this;
     }
-    //Метод получения ошибки при вводе некорректных данных
-    public RegistrationPage getError(){
+    //Метод получения ошибки при вводе некорректных данных(последовательно)
+    public String getError(){
         List<WebElement> errorList = driver.findElements(error);
-        for (int i = 0; i <= errorList.size(); i++) {
-            errorList.get(i).getText();
+        int i = 0;
+        while (i <= errorList.size()) {
+            if (i < errorList.size()) {
+                return errorList.get(i).getText();
+            }
+            i++;
         }
-        return this;
+        return "Ошибок не найдено";
     }
+    //Метод паузы
     public void pause(int mls){
         try {
             Thread.sleep(mls);
@@ -166,7 +171,7 @@ public class RegistrationPage {
         this.generationPass();
         this.reservEMail(email);
         pause(2000);
-        clickCreate();
+        this.clickCreate();
         return new MyNewMailPageCaptcha(driver);
     }
 }

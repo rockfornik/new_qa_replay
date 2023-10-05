@@ -25,6 +25,7 @@ public class MainPage {
     private By searchField = By.xpath("//*[text()='Поиск Яндекса']");
     private By searchButton = By.xpath("//button[text()='Найти']");
 
+
     //Методы работы с элементами
     //Метод клика по лого
     public MainPage clickMainLogo(){
